@@ -2,6 +2,8 @@
 
 Unofficial Dropbox Paper app for Mac built with [Electron](https://electronjs.org/).
 
+<img src="https://raw.githubusercontent.com/dreamagicjp/paper-app/master/docs/paper.png">
+
 # How to build
 
 ## Setup
