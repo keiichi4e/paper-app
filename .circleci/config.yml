@@ -1,0 +1,32 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:9.7.1-browsers
+    steps:
+      - checkout
+      - run:
+          name: Show current branch
+          command: echo ${CIRCLE_BRANCH}
+      - run:
+          name: npm install
+          command: npm install
+      - run:
+          name: npm install
+          command: npm run package
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Deploy to S3
+          command: aws s3 cp Paper-darwin-x64/Paper.app s3://keiichiinoue/apps/paper/
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
