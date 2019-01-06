@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "app": "./node_modules/.bin/electron .",
+    "start": "./node_modules/.bin/electron .",
     "package": "./node_modules/.bin/electron-packager ./ Paper --plartform=darwin --arch=x64 --electron-version=4.0.1 --overwrite"
   },
   "keywords": [],
