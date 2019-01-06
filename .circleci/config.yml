@@ -13,19 +13,8 @@ jobs:
           name: npm install
           command: npm install
       - run:
-          name: npm install
+          name: npm run package
           command: npm run package
-      - run:
-          name: Install aws cli
-          command: |
-            curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-            sudo python get-pip.py
-            sudo apt-get install python2.7-dev
-            sudo pip install awscli
-      - run:
-          name: Deploy to S3
-          command: aws s3 cp Paper-darwin-x64/Paper.app s3://keiichiinoue/apps/paper/
-
 workflows:
   version: 2
   build-deploy:
