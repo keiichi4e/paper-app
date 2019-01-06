@@ -15,7 +15,7 @@ npm install
 ## Run app
 
 ```shell
-npm run app
+npm run start
 ```
 
 ## Build app
