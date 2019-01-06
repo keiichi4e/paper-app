@@ -23,7 +23,7 @@ app.on('window-all-closed', () => {
 app.on('web-contents-created', function (webContentsCreatedEvent, contents) {
   if (contents.getType() === 'webview') {
     contents.on('new-window', function (newWindowEvent, url) {
-      console.log('block');
+      // console.log('block');
       newWindowEvent.preventDefault();
     });
   }
