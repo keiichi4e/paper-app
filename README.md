@@ -23,3 +23,6 @@ npm run start
 ```shell
 npm run package
 ```
+
+# Download
+- https://www.dropbox.com/s/u2gjrqbsljjog9j/Paper.app.zip?dl=1
