@@ -6,20 +6,47 @@ jobs:
       - image: circleci/node:9.7.1-browsers
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
       - run:
           name: Show current branch
           command: echo ${CIRCLE_BRANCH}
       - run:
           name: npm install
           command: npm install
+      - save_cache:
+          paths:
+              - ~/usr/local/lib/node_modules  # location depends on npm version
+          key: node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
       - run:
           name: npm run package
           command: npm run package
+  deploy:
+    working_directory: ~/project
+    docker:
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            # when lock file changes, use increasingly general patterns to restore cache
+            - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - node-v1-{{ .Branch }}-
+            - node-v1-
+      - run:
+          name : aws s3 sync ~/repo s3://${AWS_S3_BUCKET_NAME}/ --exact-timestamps --delete
+          command: aws s3 sync ~/repo s3://${AWS_S3_BUCKET_NAME}/ --exact-timestamps --delete
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build:
+      - deploy:
+          requires:
+            - build
           filters:
             branches:
               only: master
