@@ -22,7 +22,7 @@ build:
         overwrite: true
 workflows:
   version: 2
-  build-deploy:
+  build:
     jobs:
       - build:
           filters:
