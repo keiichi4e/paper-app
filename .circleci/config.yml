@@ -1,11 +1,15 @@
 version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@1.0.11
-jobs:
-  build:
+executors:
+  default:
     working_directory: ~/project
     docker:
       - image: circleci/node:9.7.1-browsers
+jobs:
+  build:
+    executor:
+      name: default
     steps:
       - checkout
       - run:
@@ -22,7 +26,6 @@ jobs:
             --cache-control "max-age=86400"
           overwrite: true
 workflows:
-  version: 2.1
   build_and_deploy:
     jobs:
       - build:
