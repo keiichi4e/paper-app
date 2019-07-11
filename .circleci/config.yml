@@ -8,8 +8,7 @@ executors:
       - image: circleci/node:9.7.1-browsers
 jobs:
   build:
-    executor:
-      name: default
+    executor: default
     steps:
       - checkout
       - run:
