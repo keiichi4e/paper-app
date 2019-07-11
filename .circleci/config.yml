@@ -1,25 +1,26 @@
 version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@1.0.11
-build:
-  working_directory: ~/project
-  docker:
-    - image: circleci/node:9.7.1-browsers
-  steps:
-    - checkout
-    - run:
-        name: npm install
-        command: npm install
-    - run:
-        name: npm run package
-        command: npm run package
-    - aws-s3/sync:
-        from: bucket
-        to: 's3://paper-app/package'
-        arguments: |
-          --acl public-read \
-          --cache-control "max-age=86400"
-        overwrite: true
+jobs:
+  build:
+    working_directory: ~/project
+    docker:
+      - image: circleci/node:9.7.1-browsers
+    steps:
+      - checkout
+      - run:
+          name: npm install
+          command: npm install
+      - run:
+          name: npm run package
+          command: npm run package
+      - aws-s3/sync:
+          from: bucket
+          to: 's3://paper-app/package'
+          arguments: |
+            --acl public-read \
+            --cache-control "max-age=86400"
+          overwrite: true
 workflows:
   version: 2.1
   build_and_deploy:
