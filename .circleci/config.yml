@@ -21,8 +21,8 @@ build:
           --cache-control "max-age=86400"
         overwrite: true
 workflows:
-  version: 2
-  build:
+  version: 2.1
+  build_and_deploy:
     jobs:
       - build:
           filters:
