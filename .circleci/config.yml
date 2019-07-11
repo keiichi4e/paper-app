@@ -18,7 +18,7 @@ jobs:
           name: npm run package
           command: npm run package
       - aws-s3/sync:
-          from: package
+          from: Paper-linux-x64
           to: 's3://paper-app/package'
           arguments: |
             --acl public-read \
