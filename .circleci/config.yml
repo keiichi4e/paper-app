@@ -21,7 +21,7 @@ jobs:
           from: Paper-linux-x64
           to: 's3://paper-app/package'
           arguments: |
-            --acl public-read \
+#            --acl public-read \
             --cache-control "max-age=86400"
           overwrite: true
 workflows:
