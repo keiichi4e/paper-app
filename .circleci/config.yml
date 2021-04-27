@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/project
     docker:
-      - image: circleci/node:9.7.1-browsers
+      - image: circleci/node:latest-browsers
     steps:
       - checkout
       - run:
@@ -19,7 +19,4 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              only: master
+      - build
